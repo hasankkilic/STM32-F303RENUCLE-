@@ -1,0 +1,25 @@
+/* USER CODE BEGIN 3 */
+
+	  // --- BUTON OKUMA VE DEĞİŞKENE ATAMA ---
+
+	  // 1. ADIM: Fonksiyonu Çağır, Dönüş Değerini Yakala
+	  // Sagdan sola calisir: Once pini okur, sonra sonucu "buton_durumu"na yazar.
+	  GPIO_PinState buton_durumu = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
+
+	  // 2. ADIM: Karar Mekanizması
+	  // Nucleo butonunda basinca 0 (RESET) gelir.
+	  if (buton_durumu == GPIO_PIN_RESET) 
+	  {
+		  // Butona Basildi -> LED'i Yak
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+	  }
+	  else 
+	  {
+		  // Basilmadi -> LED'i Sondur
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+	  }
+
+	  // Titreşimi engellemek için minik bekleme
+	  HAL_Delay(50);
+
+  /* USER CODE END 3 */
