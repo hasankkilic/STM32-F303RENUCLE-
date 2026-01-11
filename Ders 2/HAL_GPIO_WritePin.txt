@@ -1,0 +1,21 @@
+/* USER CODE BEGIN 3 */
+
+
+
+	  // 1. ADIM: LED'i YAK (Emir: SET)
+	  // GPIO_PIN_SET = Pini 3.3V yap (Elektrik Ver)
+	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+
+	  // 1 Saniye Bekle (Yandığını görelim)
+	  HAL_Delay(1000);
+
+	  // 2. ADIM: LED'i SÖNDÜR (Emir: RESET)
+	  // GPIO_PIN_RESET = Pini 0V yap (Toprağa Çek)
+	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+
+	  // 1 Saniye Bekle
+	  // DİKKAT: Bunu yazmazsak, döngü başa döner dönmez LED tekrar yanar,
+	  // söndüğünü hiç göremeyiz. Göz yanılması olur.
+	  HAL_Delay(1000);
+
+  /* USER CODE END 3 */
