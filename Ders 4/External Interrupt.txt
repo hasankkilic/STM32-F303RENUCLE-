@@ -1,0 +1,25 @@
+/* USER CODE BEGIN 4 */
+
+/**
+  * @brief  EXTI (External Interrupt) Callback Fonksiyonu
+  * @note   Bu fonksiyon donanım tarafından otomatik çağrılır (Event-Driven).
+  * @param  GPIO_Pin: Kesmenin geldiği pin numarası (Örn: GPIO_PIN_13)
+  */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    // 1. Güvenlik Kontrolü: Kesme gerçekten bizim butondan mı geldi?
+    // (Çünkü EXTI15_10 hattı, 10 ile 15 arasındaki tüm pinleri kapsar)
+    if(GPIO_Pin == GPIO_PIN_13)
+    {
+        // 2. Payload (İş Yükü): Yapılacak İşlem
+        // LED'in durumunu tersle (Toggle)
+        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+        
+        // DİKKAT: ISR (Interrupt Service Routine) içinde;
+        // - Asla 'HAL_Delay' kullanma! (Sistemi kilitlersin)
+        // - Asla çok uzun matematiksel işlemler yapma.
+        // - Amaç: "Vur-Kaç" (Hit and Run). İşi yap ve hemen çık.
+    }
+}
+
+/* USER CODE END 4 */
