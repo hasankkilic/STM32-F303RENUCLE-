@@ -1,0 +1,62 @@
+/* USER CODE BEGIN 2 */
+
+// 1. Veri Paketi Hazırlama (Buffer)
+uint8_t boot_msg[] = "Sistem Boot Edildi... UART Aktif!\r\n";
+
+// 2. Veriyi Gönderme Komutu
+HAL_UART_Transmit(&huart2, boot_msg, sizeof(boot_msg), 1000);
+
+/* USER CODE END 2 */
+
+
+
+
+
+
+
+/* USER CODE BEGIN 4 */
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    // Hangi pinden kesme geldiğini kontrol et
+    if(GPIO_Pin == GPIO_PIN_13)
+    {
+        // 1. Görsel Tepki (LED Toggle)
+        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+
+        // 2. Verisel Tepki (UART Log)
+        uint8_t event_msg[] = "EVENT: Butona Basildi!\r\n";
+        HAL_UART_Transmit(&huart2, event_msg, sizeof(event_msg), 100);
+    }
+}
+/* USER CODE END 4 */
+
+
+
+
+
+
+
+
+
+README
+
+
+
+STM32CubeIDE'de sağ alt tarafta "Console" sekmesini bul.
+
+Oradaki "Open Console" ikonuna (küçük ekran üzerinde + işareti veya aşağı ok) tıkla.
+
+"Command Shell Console" seçeneğini seç.
+
+Connection Type: Serial Port seç.
+
+New Connection penceresi açılırsa:
+
+Port: (STLink Virtual COM Port'u seç).
+
+Baud Rate: 115200 (Kodda ne yaptıysan o).
+
+Data/Parity/Stop: 8 / None / 1.
+
+Finish/OK de.
