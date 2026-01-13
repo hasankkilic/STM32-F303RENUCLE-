@@ -73,4 +73,23 @@ Prescaler (PSC): 71 yap. (Formül: 72MHz / (71+1) = 1 MHz Sayaç Hızı).
 
 Counter Period (ARR): 999 yap. (Formül: 1 MHz / (999+1) = 1000 Hz = 1 kHz).
 
+
 Özetle: Bizim hız kadranımız 0 ile 1000 arasında olacak.
+
+
+
+
+
+Start: HAL_TIM_PWM_Start dedin, Timer 0'dan 999'a kadar saymaya başladı. (Saniyede 1000 tur atıyor).
+
+Döngü: for döngüsü __HAL_TIM_SET_COMPARE ile Timer'a bir sınır (eşik) değeri gönderdi. Mesela 500.
+
+Donanım: Timer sayarken:
+
+Sayacı 0..1..2.. 499'a kadar -> Pini 3.3V (HIGH) tutar.
+
+Sayaç 500 olduğu an -> Pini 0V (LOW) yapar.
+
+999'a gelince başa döner.
+
+Sonuç: Pinde %50 oranında doluluk oluşur, LED yarı parlak yanar.
